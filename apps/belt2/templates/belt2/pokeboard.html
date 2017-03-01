@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Poke Board</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+  </head>
+  <body>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="/" class="brand-logo">Poke Board</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <p>Hi, {{currentuser.name}}</p>
+        {% for poke in mypokes %}
+        <p>You been poked by {{poke.poke_count}} people </p>
+        {% endfor %}
+        {% if messages %}
+          <ul class="messages">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+        {% for poke in pokers %}
+         <p>{{poke.poker.name}} poked you {{poke.poke_count}} times</p>
+        {% endfor %}
+      <b>People you may want to poke</b>
+        <div class="divider"></div>
+        <table class="highlight">
+          <tr>
+              <th>Name</th>
+              <th>Alias</th>
+              <th>Email Address</th>
+              <th>Poke History</th>
+              <th>Actions</th>
+          </tr>
+          {% for user in users %}
+          <tr>
+              <td>{{user.name}}</td>
+              <td>{{user.alias}}</td>
+              <td>{{user.email}}</td>
+              <td> {{user.poke_count}} Pokes</td>
+              <td><a href="poke/{{user.id}}">Poke</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </body>
+</html>
